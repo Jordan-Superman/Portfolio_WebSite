@@ -1,0 +1,162 @@
+:root {
+  --navy: #0f2a5f;
+  --teal: #2a9d8f;
+  --teal-strong: #1f7a6f;
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --text: #1c2333;
+  --muted: #5b6475;
+  --border: #dfe3ea;
+  --radius: 10px;
+  --max: 960px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --navy: #9db8ff;
+    --teal: #4cc2b3;
+    --teal-strong: #6fd6c8;
+    --bg: #0f141c;
+    --surface: #171e29;
+    --text: #e6e9ef;
+    --muted: #a0a8b8;
+    --border: #2a3342;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+a { color: var(--teal-strong); }
+a:hover { color: var(--navy); }
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-inline: 1.25rem;
+}
+
+/* Header / nav */
+.site-header {
+  background: var(--surface);
+  border-bottom: 3px solid var(--teal);
+}
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-block: 0.9rem;
+}
+.brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--navy);
+  text-decoration: none;
+}
+.site-nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.site-nav a { color: var(--text); text-decoration: none; font-weight: 500; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--teal-strong); }
+
+main { padding-block: 2.5rem 3rem; }
+
+h1, h2, h3 { color: var(--navy); line-height: 1.25; }
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0 0 0.5rem; }
+h2 {
+  font-size: 1.4rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--border);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+
+.lead { font-size: 1.15rem; color: var(--muted); }
+
+/* Buttons */
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--teal);
+  background: var(--teal);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn:hover { background: var(--teal-strong); border-color: var(--teal-strong); color: #fff; }
+.btn.secondary { background: transparent; color: var(--teal-strong); }
+.btn.secondary:hover { background: var(--teal); color: #fff; }
+
+/* Project cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s, transform 0.15s;
+}
+a.card:hover { border-color: var(--teal); transform: translateY(-2px); color: var(--text); }
+.card h3 { margin-top: 0; }
+.card p { margin: 0 0 1rem; color: var(--muted); flex: 1; }
+.card .more { font-weight: 600; color: var(--teal-strong); }
+.card.placeholder { border-style: dashed; opacity: 0.75; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1rem; padding: 0; list-style: none; }
+.tags li {
+  font-size: 0.8rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* Resume */
+.resume ul { padding-left: 1.2rem; }
+.resume li { margin-bottom: 0.35rem; }
+.role { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 1rem; }
+.role .when { color: var(--muted); }
+
+/* PDF viewer */
+.pdf-frame {
+  width: 100%;
+  height: 80vh;
+  min-height: 500px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.breadcrumb { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; }
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.site-footer .wrap { padding-block: 1.5rem; }
+
+@media (max-width: 600px) {
+  .pdf-frame { height: 60vh; min-height: 360px; }
+}

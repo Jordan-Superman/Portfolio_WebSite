@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Satellite Survey 2026 | Jordan Supramaniam</title>
+  <meta name="description" content="Proof of concept that detects new construction in aerial imagery and estimates addresses to help keep an address master file current.">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Jordan Supramaniam</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/#resume">Resume</a>
+        <a href="/projects/" aria-current="page">Projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="breadcrumb"><a href="/projects/">Projects</a> / Satellite Survey 2026</p>
+    <h1>Satellite Survey 2026</h1>
+    <ul class="tags"><li>Python</li><li>ResNet-18 + Transformer (BIT-CD)</li><li>Image processing</li><li>Nominatim geocoding</li></ul>
+
+    <p class="lead">
+      A proof of concept for a system that keeps an address master file up to date. It finds new
+      construction in aerial photos, then estimates the street address of each new building.
+    </p>
+
+    <h2>Overview</h2>
+    <p>
+      The US Census Bureau recently moved to in-office satellite surveying to maintain its address
+      records. I wanted to see how far recent AI models could automate that work. The project builds
+      on Hao Chen's BIT change-detection model (ResNet-18 with a transformer) and the LEVIR-CD dataset.
+    </p>
+
+    <h3>What I built</h3>
+    <ul>
+      <li>Fixed the original code so it runs out of the box: replaced deprecated functions, removed the need for label files at inference time and added diagnostic metrics.</li>
+      <li>Built a preprocessing pipeline that stitches LINZ JPEG 2000 aerial tiles of Auckland (2017 and 2024) and downsamples them from 0.075 m to the 0.5 m/pixel resolution the model expects, cut into 256×256 tiles.</li>
+      <li>Drew bounding boxes around connected regions of detected change, which made the results much easier to read and check.</li>
+      <li>Converted each detection's centre into GPS coordinates and reverse-geocoded it with Nominatim to estimate a street address.</li>
+      <li>Combined everything into one pipeline with a GUI for reviewing results.</li>
+    </ul>
+
+    <h3>Results</h3>
+    <p>
+      The system detected every instance of new construction in the test area. Two limitations remain:
+      buildings close together can merge into one detection, and address estimates can pick the wrong
+      street for corner lots or properties with access from two streets. A real deployment would still
+      need someone to review the results.
+    </p>
+
+    <h2>Full report</h2>
+    <div class="btn-row" style="margin-bottom:1rem">
+      <a class="btn" href="report.pdf" target="_blank" rel="noopener">Open PDF</a>
+      <a class="btn secondary" href="report.pdf" download="Satellite-Survey-2026-Jordan-Supramaniam.pdf">Download PDF</a>
+    </div>
+    <iframe class="pdf-frame" src="report.pdf#view=FitH" title="Satellite Survey 2026 report (PDF)" loading="lazy"></iframe>
+    <p class="breadcrumb">If the report doesn't show above (common on phones), use the Open PDF button.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">&copy; 2026 Jordan Supramaniam</div>
+  </footer>
+</body>
+</html>
