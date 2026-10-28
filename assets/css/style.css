@@ -150,6 +150,50 @@ a.card:hover { border-color: var(--teal); transform: translateY(-2px); color: va
 
 .breadcrumb { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; }
 
+/* Page notice banner */
+.notice {
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1rem;
+  background: #fff4d6;
+  border: 1px solid #f0c75e;
+  border-left: 5px solid #e0a800;
+  border-radius: var(--radius);
+  color: #5c4400;
+  font-size: 0.95rem;
+}
+@media (prefers-color-scheme: dark) {
+  .notice { background: #2e2610; border-color: #6b5517; border-left-color: #e0a800; color: #f3dfa2; }
+}
+
+/* Interactive demo */
+button.btn { font: inherit; line-height: inherit; cursor: pointer; }
+.btn:disabled { opacity: 0.5; pointer-events: none; }
+.demo-map {
+  height: 360px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.demo-status { margin: 1rem 0 0; }
+.demo-status.is-error { color: #c0392b; }
+.demo-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+.demo-results figure { margin: 0; }
+.demo-results img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: opacity 0.2s;
+}
+.demo-results figcaption { margin-top: 0.35rem; font-size: 0.9rem; color: var(--muted); }
+.demo.is-loading .demo-results img { opacity: 0.45; }
+
 .site-footer {
   border-top: 1px solid var(--border);
   color: var(--muted);
@@ -159,4 +203,10 @@ a.card:hover { border-color: var(--teal); transform: translateY(-2px); color: va
 
 @media (max-width: 600px) {
   .pdf-frame { height: 60vh; min-height: 360px; }
+  .demo-map { height: 300px; }
+  .demo-results { grid-template-columns: 1fr; }
+}
+
+@media (prefers-color-scheme: dark) {
+  .demo-status.is-error { color: #ff8a80; }
 }

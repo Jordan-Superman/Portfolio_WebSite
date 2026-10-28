@@ -6,6 +6,9 @@
   <title>Satellite Survey 2026 | Jordan Supramaniam</title>
   <meta name="description" content="Proof of concept that detects new construction in aerial imagery and estimates addresses to help keep an address master file current.">
   <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous" defer></script>
+  <script src="/assets/js/bitcd-demo.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -20,6 +23,11 @@
   </header>
 
   <main class="wrap">
+    <aside class="notice" role="note">
+      This demonstration was rushed into production using Claude AI for use in an interview. Quality is
+      below standards, and while the underlying application is my own work, significant changes were made
+      by Claude Code to allow it to run on a website and improve the user experience.
+    </aside>
     <p class="breadcrumb"><a href="/projects/">Projects</a> / Satellite Survey 2026</p>
     <h1>Satellite Survey 2026</h1>
     <ul class="tags"><li>Python</li><li>ResNet-18 + Transformer (BIT-CD)</li><li>Image processing</li><li>Nominatim geocoding</li></ul>
@@ -52,6 +60,39 @@
       street for corner lots or properties with access from two streets. A real deployment would still
       need someone to review the results.
     </p>
+
+    <h2 id="demo">Try it</h2>
+    <p>
+      Click anywhere inside the highlighted area of Auckland's North Shore. The demo fetches the 2017
+      and 2024 LINZ aerial photos for a 512&nbsp;m square around that point, runs the change-detection
+      model, and draws a red box around each new building it finds.
+    </p>
+    <div class="demo" id="bitcd-demo" data-api="">
+      <div class="demo-map" id="demo-map" aria-label="Map of the demo area. Click to choose a location."></div>
+      <p class="demo-status" id="demo-status" aria-live="polite">
+        Showing an example: a new subdivision on Maika Lane, Birkenhead.
+      </p>
+      <div class="btn-row">
+        <button class="btn" type="button" id="demo-run" disabled>Run detection here</button>
+        <button class="btn secondary" type="button" id="demo-example">Show example</button>
+      </div>
+      <div class="demo-results">
+        <figure>
+          <img id="demo-before" src="demo/maika-2017.jpg" width="1024" height="1024"
+               alt="Aerial photo from 2017 of the selected area">
+          <figcaption>Before (2017)</figcaption>
+        </figure>
+        <figure>
+          <img id="demo-after" src="demo/maika-2024.jpg" width="1024" height="1024"
+               alt="Aerial photo from 2024 of the same area, with red boxes around detected new buildings">
+          <figcaption>After (2024&ndash;25), new buildings boxed in red</figcaption>
+        </figure>
+      </div>
+      <p class="breadcrumb">
+        Aerial imagery sourced from the <a href="https://data.linz.govt.nz/">LINZ Data Service</a>, licensed
+        for reuse under CC BY 4.0. Map &copy; OpenStreetMap contributors. Black strips are gaps in the source imagery.
+      </p>
+    </div>
 
     <h2>Full report</h2>
     <div class="btn-row" style="margin-bottom:1rem">
